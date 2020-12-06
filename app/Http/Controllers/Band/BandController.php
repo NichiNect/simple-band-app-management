@@ -127,15 +127,19 @@ class BandController extends Controller
         session()->flash('success', 'Band was updated');
         return redirect()->route('bands.index');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param \App\Models\Band $band
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Band $band)
     {
-        //
+        Storage::delete($band->thumbnail);
+        $band->genres()->detach();
+        $band->delete();
+
+        session()->flash('success', 'Band was updated');
     }
 }

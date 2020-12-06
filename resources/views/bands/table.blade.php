@@ -22,7 +22,7 @@
                     <td>{{ $band->genres()->get()->implode('name', ', ') }}</td>
                     <td>
                         <a href="{{ route('bands.edit', $band->slug) }}" class="btn btn-warning text-white">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <div endpoint="{{ route('bands.destroy', $band) }}" class="delete d-inline"></div>
                     </td>
                 </tr>
             @empty
