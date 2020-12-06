@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('body')
-
+    <x-navbar></x-navbar>
     <div class="container-fluid">
         <div class="row py-3">
             <div class="col-md-3">
@@ -12,5 +12,7 @@
             </div>
         </div>
     </div>
+
+    @yield('script')
 
 @endsection
