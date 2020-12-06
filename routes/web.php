@@ -28,5 +28,6 @@ Route::middleware('auth')->group(function() {
     Route::prefix('bands')->group(function() {
         Route::get('/create', [BandController::class, 'create'])->name('bands.create');
         Route::post('/create', [BandController::class, 'store'])->name('bands.store');
+        Route::get('/table', [BandController::class, 'index'])->name('bands.index');
     });
 });
