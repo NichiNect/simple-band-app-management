@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label for="genres">Choose Genres</label>
-                    <select type="text" name="genres[]" class="form-control" id="genres" placeholder="Choose genres.." multiple>
+                    <select type="text" name="genres[]" class="form-control select2multiple" id="genres" placeholder="Choose genres.." multiple>
                         @foreach ($genres as $genre)
                             <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                         @endforeach
@@ -50,6 +50,12 @@
 	$('.custom-file-input').on('change', function() {
 		let fileName = $(this).val().split('\\').pop();
 		$(this).next('.custom-file-label').addClass("selected").html(fileName);
-	});
+    });
+    
+    $(document).ready(function() {
+        $('.select2multiple').select2({
+            placeholder: 'Choose the genres..'
+        });
+    });
 </script>
 @endsection

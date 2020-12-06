@@ -65900,15 +65900,27 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
+/***/ "./resources/sass/backend.scss":
+/*!*************************************!*\
+  !*** ./resources/sass/backend.scss ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!*******************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/backend.scss ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\ProgramFiles\xampp\htdocs\phphtdocs\Laravel\l8\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\ProgramFiles\xampp\htdocs\phphtdocs\Laravel\l8\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\ProgramFiles\xampp\htdocs\phphtdocs\Laravel\sk-band-app\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\ProgramFiles\xampp\htdocs\phphtdocs\Laravel\sk-band-app\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\ProgramFiles\xampp\htdocs\phphtdocs\Laravel\sk-band-app\resources\sass\backend.scss */"./resources/sass/backend.scss");
 
 
 /***/ })
