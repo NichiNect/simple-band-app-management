@@ -3,11 +3,12 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Create Band
+            Edit Band
         </div>
         <div class="card-body">
-            <form action="{{ route('bands.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('bands.update', $band) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="thumbnail">Thumbnail</label>
                     <div class="custom-file">
@@ -20,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Name..">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Name.." value="{{ old('name') ?? $band->name }}">
                     @error('name')
                         <small class="text-danger font-italic mt-2">{{ $message }}</small>
                     @enderror
@@ -28,9 +29,9 @@
                 <div class="form-group">
                     <label for="genres">Choose Genres</label>
                     <select type="text" name="genres[]" class="form-control select2multiple" id="genres" placeholder="Choose genres.." multiple>
-                        @foreach ($genres as $genre)
-                            <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                        @endforeach
+                    @foreach ($genres as $genre)
+                    <option {{ $band->genres()->find($genre->id) ? 'selected' : '' }} value="{{ $genre->id }}">{{ $genre->name }}</option>
+                    @endforeach
                     </select>
                     @error('genres')
                         <small class="text-danger font-italic mt-2">{{ $message }}</small>

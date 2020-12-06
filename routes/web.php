@@ -29,5 +29,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/create', [BandController::class, 'create'])->name('bands.create');
         Route::post('/create', [BandController::class, 'store'])->name('bands.store');
         Route::get('/table', [BandController::class, 'index'])->name('bands.index');
+        Route::get('/{band:slug}/edit', [BandController::class, 'edit'])->name('bands.edit');
+        Route::put('{band:slug}/edit', [BandController::class, 'update'])->name('bands.update');
     });
 });

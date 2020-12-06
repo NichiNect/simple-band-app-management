@@ -6,6 +6,7 @@ use App\Models\Band;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class BandController extends Controller
 {
@@ -55,13 +56,13 @@ class BandController extends Controller
         $band = Band::create([
             'name' => $request->name,
             'slug' => \Str::slug($request->name),
-            'thumbnail' => request()->file('thumbnail')->store('images/band'),
+            'thumbnail' => request('thumbnail') ? request()->file('thumbnail')->store('images/band') : null,
         ]);
 
         $band->genres()->sync(request('genres'));
 
         session()->flash('success', 'Band was created');
-        return back();
+        return redirect()->route('bands.index');
     }
 
     /**
@@ -78,24 +79,53 @@ class BandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  eloquent  \App\Models\Band $band
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Band $band)
     {
-        //
+        $genres = Genre::get();
+
+        return view('bands.edit', [
+            'band' => $band,
+            'genres' => $genres
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Models\Band $band
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Band $band)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:bands,name,' . $band->id,
+            'thumbnail' => request('thumbnail') ? 'image|mimes:jpeg,jpg,png,svg' : '',
+            'genres' => 'required|array',
+        ]);
+
+        if(request('thumbnail')) {
+            Storage::delete($band->thumbnail);
+            $thumbnail = request()->file('thumbnail')->store('images/band');
+        } else if($band->thumbnail) {
+            $thumbnail = $band->thumbnail;
+        } else {
+            $thumbnail = null;
+        }
+        
+        $band->update([
+            'name' => $request->name,
+            'slug' => \Str::slug($request->name),
+            'thumbnail' => $thumbnail
+        ]);
+
+        $band->genres()->sync(request('genres'));
+
+        session()->flash('success', 'Band was updated');
+        return redirect()->route('bands.index');
     }
 
     /**

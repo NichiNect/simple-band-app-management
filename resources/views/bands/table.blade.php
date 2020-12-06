@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('content')
-    {{-- <x-alert></x-alert> --}}
+    <x-alert></x-alert>
 
     <table class="table table-hover">
         <thead>
@@ -21,7 +21,7 @@
                     <td>{{ $band->name }}</td>
                     <td>{{ $band->genres()->get()->implode('name', ', ') }}</td>
                     <td>
-                        <a href="#" class="btn btn-warning text-white">Edit</a>
+                        <a href="{{ route('bands.edit', $band->slug) }}" class="btn btn-warning text-white">Edit</a>
                         <a href="#" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
