@@ -10,6 +10,16 @@ class Genre extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'slug'
+    ];
+
+    /**
      * Method relation Many to Many with `Band` model `bands` table
      * Many
      */

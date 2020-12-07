@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Band\BandController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Band\AlbumController;
+use App\Http\Controllers\Band\{AlbumController, BandController, GenreController};
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +41,14 @@ Route::middleware('auth')->group(function() {
         Route::get('/{album:slug}/edit', [AlbumController::class, 'edit'])->name('albums.edit');
         Route::put('/{album:slug}/edit', [AlbumController::class, 'update'])->name('albums.update');
         Route::delete('{band:slug}/delete', [AlbumController::class, 'destroy'])->name('albums.destroy');
+    });
+
+    Route::prefix('genres')->group(function() {
+        Route::get('/create', [GenreController::class, 'create'])->name('genres.create');
+        Route::post('/create', [GenreController::class, 'store'])->name('genres.store');
+        Route::get('', [GenreController::class, 'index'])->name('genres.index');
+        Route::get('/{genre:slug}/edit', [GenreController::class, 'edit'])->name('genres.edit');
+        Route::put('/{genre:slug}/edit', [GenreController::class, 'update'])->name('genres.update');
+        Route::delete('/{genre:slug}/delete', [GenreController::class, 'destroy'])->name('genres.destroy');
     });
 });
