@@ -10,6 +10,18 @@ class Album extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'band_id',
+        'year',
+    ];
+
+    /**
      * Method relation One to Many with `Band` model `bands` table
      * One
      */

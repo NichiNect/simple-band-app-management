@@ -13,8 +13,8 @@
 <div class="mb-4">
     <small class="text-secondary font-weight-bold d-block mb-2">ALBUM</small>
     <div class="list-group">
-        <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">Create</a>
-        <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">Table</a>
+        <a href="{{ route('albums.create') }}" class="list-group-item list-group-item-action">Create</a>
+        <a href="{{ route('albums.index') }}" class="list-group-item list-group-item-action">Table</a>
     </div>
 </div>
 
