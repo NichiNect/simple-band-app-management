@@ -41,5 +41,6 @@ Route::middleware('auth')->group(function() {
         Route::get('/table', [AlbumController::class, 'index'])->name('albums.index');
         Route::get('/{album:slug}/edit', [AlbumController::class, 'edit'])->name('albums.edit');
         Route::put('/{album:slug}/edit', [AlbumController::class, 'update'])->name('albums.update');
+        Route::delete('{band:slug}/delete', [AlbumController::class, 'destroy'])->name('albums.destroy');
     });
 });

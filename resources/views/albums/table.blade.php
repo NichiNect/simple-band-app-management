@@ -26,6 +26,7 @@
                             <td>{{ $album->band->name }}</td>
                             <td>
                                 <a href="{{ route('albums.edit', $album) }}" class="btn btn-warning text-white">Edit</a>
+                                <div endpoint="{{ route('albums.destroy', $album) }}" class="delete d-inline"></div>
                             </td>
                         </tr>
                     @empty
