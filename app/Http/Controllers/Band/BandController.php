@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Band;
 
 use App\Models\Band;
 use App\Models\Genre;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Band\BandRequest;
 use Illuminate\Support\Facades\Storage;
 
 class BandController extends Controller
@@ -39,17 +39,11 @@ class BandController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Band\BandRequest;
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BandRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'thumbnail' => 'nullable|image|mimes:jpeg,jpg,png,svg',
-            'genres' => 'required|array',
-        ]);
-
         // if ($request->hasFile('thumbnail')) {
         //     $photo = $request->file('thumbnail');
         //     $image_extension = $photo->extension();
@@ -83,7 +77,7 @@ class BandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  eloquent  \App\Models\Band $band
+     * @param  \App\Models\Band $band
      * @return \Illuminate\Http\Response
      */
     public function edit(Band $band)
@@ -100,18 +94,12 @@ class BandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Band\BandRequest;
      * @param \App\Models\Band $band
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Band $band)
+    public function update(BandRequest $request, Band $band)
     {
-        $request->validate([
-            'name' => 'required|unique:bands,name,' . $band->id,
-            'thumbnail' => 'nullable|image|mimes:jpeg,jpg,png,svg',
-            'genres' => 'required|array',
-        ]);
-
         if(request('thumbnail')) {
             Storage::delete($band->thumbnail);
             $thumbnail = request()->file('thumbnail')->store('images/band');
@@ -143,6 +131,7 @@ class BandController extends Controller
     {
         Storage::delete($band->thumbnail);
         $band->genres()->detach();
+        $band->albums()->delete();
         $band->delete();
 
         session()->flash('success', 'Band was updated');

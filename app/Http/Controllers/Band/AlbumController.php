@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Band;
 
 use App\Models\Band;
 use App\Models\Album;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Band\AlbumRequest;
 
 class AlbumController extends Controller
 {
@@ -42,17 +42,11 @@ class AlbumController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Band\AlbumRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlbumRequest $request)
     {
-        $request->validate([
-            'band' => 'required|unique:albums',
-            'name' => 'required',
-            'year' => 'required',
-        ]);
-
         $album = Album::create([
             'name' => $request->name,
             'slug' => \Str::slug($request->name),
@@ -95,18 +89,12 @@ class AlbumController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Band\AlbumRequest  $request
      * @param  \App\Models\Album $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function update(AlbumRequest $request, Album $album)
     {
-        $request->validate([
-            'band' => 'required|unique:albums,name,' . $album->id,
-            'name' => 'required',
-            'year' => 'required',
-        ]);
-
         $album->update([
             'name' => $request->name,
             'slug' => \Str::slug($request->name),
