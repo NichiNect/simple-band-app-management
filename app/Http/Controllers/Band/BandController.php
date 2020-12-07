@@ -29,7 +29,11 @@ class BandController extends Controller
     public function create()
     {
         $genres = Genre::get();
-        return view('bands.create', compact('genres'));
+        return view('bands.create', [
+            'genres' => $genres,
+            'band' => new Band,
+            'btnSubmit' => 'Create'
+        ]);
     }
 
     /**
@@ -42,7 +46,7 @@ class BandController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'thumbnail' => request('thumbnail') ? 'image|mimes:jpeg,jpg,png,svg' : '',
+            'thumbnail' => 'nullable|image|mimes:jpeg,jpg,png,svg',
             'genres' => 'required|array',
         ]);
 
@@ -88,7 +92,8 @@ class BandController extends Controller
 
         return view('bands.edit', [
             'band' => $band,
-            'genres' => $genres
+            'genres' => $genres,
+            'btnSubmit' => 'Update'
         ]);
     }
 
@@ -103,7 +108,7 @@ class BandController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:bands,name,' . $band->id,
-            'thumbnail' => request('thumbnail') ? 'image|mimes:jpeg,jpg,png,svg' : '',
+            'thumbnail' => 'nullable|image|mimes:jpeg,jpg,png,svg',
             'genres' => 'required|array',
         ]);
 
