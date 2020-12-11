@@ -116,4 +116,15 @@ class AlbumController extends Controller
     {
         $album->delete();
     }
+
+    /**
+     * API method for get albums by band id
+     * 
+     * @param \App\Models\Band $bands
+     * @return $band->albums
+     */
+    public function getAlbumsByBandID(Band $band)
+    {
+        return $band->albums;
+    }
 }

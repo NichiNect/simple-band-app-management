@@ -38,3 +38,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // });
 
 require('./components/Delete');
+require('./components/lyrics/Create');
