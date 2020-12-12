@@ -55880,20 +55880,47 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Create(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
-      bands = _useState2[0],
-      setBands = _useState2[1];
+      message = _useState2[0],
+      setMessage = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      albums = _useState4[0],
-      setAlbums = _useState4[1];
+      bands = _useState4[0],
+      setBands = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      bandId = _useState6[0],
-      setBandId = _useState6[1];
+      albums = _useState6[0],
+      setAlbums = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      bandId = _useState8[0],
+      setBandId = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      albumId = _useState10[0],
+      setAlbumId = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      title = _useState12[0],
+      setTitle = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      body = _useState14[0],
+      setBody = _useState14[1];
+
+  var request = {
+    band: bandId,
+    album: albumId,
+    title: title,
+    body: body
+  };
 
   var getBands = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -55952,19 +55979,33 @@ function Create(props) {
 
   var store = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              e.preventDefault(); // let response = await axios.post(props.endpoint);
-              // console.log(response.data);
+              e.preventDefault();
+              _context3.prev = 1;
+              _context3.next = 4;
+              return axios.post(props.endpoint, request);
 
-            case 1:
+            case 4:
+              response = _context3.sent;
+              setMessage(response.data.message);
+              _context3.next = 11;
+              break;
+
+            case 8:
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](1);
+              console.log(_context3.t0.message);
+
+            case 11:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3);
+      }, _callee3, null, [[1, 8]]);
     }));
 
     return function store(_x2) {
@@ -55974,8 +56015,11 @@ function Create(props) {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     getBands();
-  });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, message && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "alert alert-success",
+    role: "alert"
+  }, message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "card-header"
@@ -56004,6 +56048,9 @@ function Create(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "album"
   }, "Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    onChange: function onChange(e) {
+      return setAlbumId(e.target.value);
+    },
     name: "album",
     id: "album",
     className: "form-control"
@@ -56014,10 +56061,37 @@ function Create(props) {
       key: album.id,
       value: album.id
     }, album.name);
-  }))) : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }))) : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "title"
+  }, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    value: title,
+    onChange: function onChange(e) {
+      return setTitle(e.target.value);
+    },
+    name: "title",
+    id: "title",
+    className: "form-control"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "body"
+  }, "Lyric"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+    type: "text",
+    value: body,
+    onChange: function onChange(e) {
+      return setBody(e.target.value);
+    },
+    name: "body",
+    id: "body",
+    rows: "10",
+    className: "form-control"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     type: "submit",
     className: "btn btn-primary"
-  }, "Create"))));
+  }, "Create")))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Create);

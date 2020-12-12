@@ -37,4 +37,13 @@ class Band extends Model
     {
         return $this->belongsToMany(Genre::class, 'band_genre');
     }
+
+    /**
+     * Method relation One to Many with `Lyric` model `lyrics` table
+     * Many
+     */
+    public function lyrics()
+    {
+        return $this->hasMany(Lyric::class);
+    }
 }
